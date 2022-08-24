@@ -1,0 +1,40 @@
+</$objtype/mkfile
+
+TARG=\
+	mkinfo\
+	stdcursor\
+	stdborder\
+	fritz2\
+	neon\
+	neon2\
+	neoncursor\
+	morph1\
+	1bpp\
+	posterize\
+	tint\
+	screenshot\
+	finish\
+
+BIN=/sys/lib/fxterm/postfx/fritz/bin/$objtype/
+
+OFILES=\
+	common.$O\
+
+HFILES=\
+	common.h\
+
+UPDATE=\
+	mkfile\
+	$HFILES\
+	${OFILES:%.$O=%.c}\
+
+</sys/src/cmd/mkmany
+
+syms:V:
+	echo > syms
+	for(i in *.c) $CC -a $i >> syms 
+
+install:V: installdirs
+
+installdirs:
+	mkdir -p $BIN

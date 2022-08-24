@@ -1,0 +1,6 @@
+FILES = `{ls | grep -v mkfile}
+
+install:V:
+	mkdir -p /rc/bin/rice/fritz
+	cp $FILES /rc/bin/rice/fritz
+

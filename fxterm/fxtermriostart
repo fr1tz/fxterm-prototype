@@ -1,0 +1,3 @@
+#!/bin/rc
+
+#window -scroll projects/fxterm/rice/6.tint.pfx /tmp/background-b.bit

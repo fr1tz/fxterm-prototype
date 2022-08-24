@@ -1,0 +1,23 @@
+#!/bin/rc 
+
+rfork e
+
+if(! ~ $#* 0) {
+	echo 'usage: vncsrv' >[2=1]
+	exit 'usage'
+}
+
+tmpfile = /tmp/rice.$user.$pid
+echo -n > $tmpfile || exit
+
+BIN = /sys/lib/fxterm/postfx/fritz/bin/$objtype
+IMG = /sys/lib/fxterm/postfx/fritz/images
+
+shader =  ($BIN/neoncursor)
+
+echo 'postfx shader' $shader >> $tmpfile
+echo 'postfx on' >> $tmpfile
+
+cat $tmpfile > /dev/rice/ctl
+
+rm $tmpfile

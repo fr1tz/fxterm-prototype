@@ -1,0 +1,35 @@
+#!/bin/rc 
+
+rfork e
+
+flagfmt = 'd:darkcol color, l:lightcol color'
+eval `{aux/getflags $*} || {
+	aux/usage
+	exit 'usage'
+}
+
+tmpfile = /tmp/rice.$user.$pid
+echo -n > $tmpfile || exit
+
+BIN = /sys/lib/fxterm/postfx/fritz/bin/$objtype
+IMG = /sys/lib/fxterm/postfx/local/images
+
+args = ()
+~ $#darkcol 1 && args = ($args -d $darkcol)
+~ $#lightcol 1 && args = ($args -l $lightcol)
+
+shader = ($BIN/mkinfo '|' $BIN/neon2 '|' $BIN/finish -w $IMG/neon1.wp.bit -b $IMG/neon1.bg.bit)
+
+if(~ $1 '-m') {
+	echo 'postfx continuous on' >> $tmpfile
+	shader = ($shader '|' $BIN/morph1)
+}
+
+shader = ($shader '|' $BIN/stdcursor)
+
+echo 'postfx shader' $shader >> $tmpfile
+echo 'postfx on' >> $tmpfile
+
+cat $tmpfile > /dev/rice/ctl
+
+rm $tmpfile

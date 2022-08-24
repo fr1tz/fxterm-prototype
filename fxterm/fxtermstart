@@ -1,0 +1,16 @@
+#!/bin/rc
+
+cd
+plumber
+rm /srv/fxterm
+srvfs fxterm /mnt/fxterm
+#font = /lib/font/bit/fixed/unicode.5x8.font
+#font = /lib/font/bit/fixed/unicode.4x6.font
+#font = /lib/font/bit/fixed/unicode.6x13.font
+#font = /lib/font/bit/charcoal/unicode.12.font
+#font = /lib/font/bit/c64/c64.font
+#font = /lib/font/bit/dec/unicode.20.font
+#font = /lib/font/bit/consola/consola.12.font
+#font = /lib/font/bit/c64/unicode.c64.font 
+#font = /lib/font/bit/fixed/unicode.7x13B.font
+rio85 -r

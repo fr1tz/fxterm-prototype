@@ -1,0 +1,9 @@
+#!/bin/rc 
+
+shader = '/sys/lib/fxterm/postfx/fritz/bin/$objtype/morph1'
+
+>/mnt/fxterm/postfx/ctl {
+	echo postfx continuous on
+	echo postfx shader $shader 
+	echo postfx on
+}

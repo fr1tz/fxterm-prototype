@@ -1,0 +1,33 @@
+</$objtype/mkfile
+
+TARG=postfxtap
+BIN=/sys/lib/fxterm/postfx/postfxtap/bin/$objtype/
+
+OFILES=\
+	proto.$O\
+	auth.$O\
+	rre.$O\
+	rlist.$O\
+	vncs.$O\
+	postfxtap.$O\
+
+HFILES=\
+	vnc.h\
+	vncs.h\
+
+UPDATE=\
+	mkfile\
+	$HFILES\
+	${OFILES:%.$O=%.c}\
+	${SOFILES:%.$O=%.c}\
+	${COFILES:%.$O=%.c}\
+	${TARG:%=%.c}\
+
+default:V:	all
+
+</sys/src/cmd/mkone
+
+install:V: installdirs
+
+installdirs:V:
+	mkdir -p $BIN

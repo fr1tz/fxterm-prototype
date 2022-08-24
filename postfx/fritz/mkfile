@@ -1,0 +1,12 @@
+POSTFXDIR=/sys/lib/fxterm/postfx/fritz/
+
+install:V:
+	mkdir -p $POSTFXDIR
+	for(d in images shaders rc) @{
+		cd $d && mk install
+	}
+
+clean:V:
+	for(d in shaders) @{
+		cd $d && mk clean
+	}

@@ -1,0 +1,5 @@
+<../mkfile
+
+install:V:
+	mkdir -p $POSTFXDIR/images
+	cp *.bit $POSTFXDIR/images

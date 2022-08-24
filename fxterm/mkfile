@@ -1,0 +1,40 @@
+</$objtype/mkfile
+
+TARG=fxterm
+BIN=/$objtype/bin
+
+OFILES=\
+	chan.$O\
+	compat.$O\
+	dev.$O\
+	devdraw.$O\
+	devmouse.$O\
+	devcons.$O\
+	devrice.$O\
+	emu.$O\
+	exporter.$O\
+	exportfs.$O\
+	fxtermdraw.$O\
+	screen.$O\
+
+HFILES=\
+	fxterm.h\
+	screen.h\
+	compat.h\
+	errstr.h\
+
+UPDATE=\
+	mkfile\
+	$HFILES\
+	${OFILES:%.$O=%.c}\
+	${SOFILES:%.$O=%.c}\
+	${COFILES:%.$O=%.c}\
+	${TARG:%=%.c}\
+
+
+default:V:	all
+
+</sys/src/cmd/mkone
+
+errstr.h:	error.h
+	sed 's/extern //;s,;.*/\* (.*) \*/, = "\1";,' < error.h > errstr.h

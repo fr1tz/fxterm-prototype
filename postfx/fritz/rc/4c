@@ -1,0 +1,23 @@
+#!/bin/rc 
+
+rfork e
+
+if(! ~ $#* 4) {
+	echo 'usage: 4c color1 color2 color3 color4' >[1=2]
+}
+
+tmpfile = /tmp/rice.$user.$pid
+echo -n > $tmpfile || exit
+
+BIN = /sys/lib/fxterm/postfx/fritz/bin/$objtype
+IMG = /sys/lib/fxterm/postfx/fritz/images
+
+shader = ($BIN/mkinfo '|' $BIN/4c $*)
+shader = ($shader '|' $BIN/stdcursor)
+
+echo 'postfx shader' $shader >> $tmpfile
+echo 'postfx on' >> $tmpfile
+
+cat $tmpfile > /dev/rice/ctl
+
+rm $tmpfile

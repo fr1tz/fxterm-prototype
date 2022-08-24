@@ -1,0 +1,3 @@
+#!/bin/rc 
+
+exec rice/fritz/monoglow 0x00aaff

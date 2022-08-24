@@ -1,0 +1,34 @@
+#!/bin/rc 
+
+~ $#* 1 || {
+	echo 'usage: monoglow color' >[1=2]
+	exit 'usage'
+}
+
+tint = $1
+
+rfork e
+
+tmpfile = /tmp/rice.$user.$pid
+echo -n > $tmpfile || exit
+
+BIN = /sys/lib/fxterm/postfx/fritz/bin/$objtype
+IMG = /sys/lib/fxterm/postfx/fritz/images
+
+shader = ($BIN/mkinfo '|' $BIN/neon)
+
+if(~ $1 '-m') {
+	echo 'postfx continuous on' >> $tmpfile
+	shader = ($shader '|' $BIN/morph1)
+}
+
+shader = ($shader '|' $BIN/stdcursor)
+shader = ($shader '|' $BIN/tint $tint)
+shader = ($shader '|' $BIN/finish -l)
+
+echo 'postfx shader' $shader >> $tmpfile
+echo 'postfx on' >> $tmpfile
+
+cat $tmpfile > /dev/rice/ctl
+
+rm $tmpfile
